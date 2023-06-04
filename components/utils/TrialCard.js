@@ -8,6 +8,7 @@ import {
 		where
 } from "firebase/firestore"
 import { TrialsContext } from "../../contexts/TrialsContext"
+import styles from "../../styles/cards.module.css"
 
 export default function TrialCard() {
 	const [array, setArray] = useContext(TrialsContext)
@@ -31,15 +32,62 @@ export default function TrialCard() {
 		return unsub
 	},[])
 
-	useEffect(()=>{
-		array.map((el, i, arr) => console.log(arr))
-	},[array])
-
 	return (
-		<div>
-			{
-				array.map(el => (<div>{el.nombre}</div>))
-			}
+		<section>
+				{
+					array.map((el, i) => (
+						<InnerCard
+							Athlete={el.nombre}
+							Pushs={el.lagartijas}
+							Abs={el.abdominales}
+							Squats={el.sentadillas}
+							Burpees={el.burpees}
+							Period={el.periodo}
+							key={i}
+						/>
+					))
+				}
+		</section>
+	)
+}
+
+function InnerCard({ Athlete, Pushs, Abs, Squats, Burpees, Period }) {
+	return(
+		<div className={styles.cardBox}>
+			<div className={styles.cardLy}>
+
+				<div className={styles.rone}>
+					<strong>{Athlete} </strong>
+				</div>
+
+				<div className={styles.rtwo}>
+					<span>
+						lagartijas
+						<br/>
+						{Pushs}
+					</span>
+						<span>
+						abdominales	
+						<br/>
+						{Abs}
+					</span>
+					<span>
+						sentadillas
+						<br/>
+						{Squats}
+					</span>
+					<span>
+						burpees
+						<br/>
+						{Burpees}
+					</span>
+				</div>
+
+				<div className={styles.rthree}>
+					<span>{Period} </span>
+				</div>
+
+			</div>
 		</div>
 	)
 }

@@ -1,24 +1,20 @@
 import React from 'react'
-import "./modals.css"
+import "../../styles/modals.module.css"
 
-const NormalModal = ({ openNotif, setOpenNotif, parentText }) => {
-    return (
-        openNotif &&
-        <div className="globalContainer">
-            <div className="modalContainer">                
-				<div className="centeredGrid">
-                    <h4>Desde firebase, pasando por custom claims</h4>
-                    <p>
-                        {parentText}
-                    </p>
-                    <br />
-                    <button type="button" className="formBtn" onClick={() => setOpenNotif(false)}>
-                        Cancelar
-                    </button>
-				</div>                
-            </div>
-        </div>
-    )
+export default const NormalModal = ({ openNotif, setOpenNotif, Children }) => {
+	return (
+		openNotif &&
+			<div className="globalContainer">
+				<div className="modalContainer">                
+					<div className="centeredGrid">
+						<div>
+							{Children}	
+						</div>
+						<button type="button" className="formBtn" onClick={() => setOpenNotif(false)}>
+							cerrar
+						</button>
+					</div>
+				</div>
+			</div>
+	)
 }
-
-export default NormalModal

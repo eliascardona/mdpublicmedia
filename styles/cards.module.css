@@ -1,0 +1,39 @@
+.cardBox {
+	width: 100%;
+	margin-bottom: 1.4em;
+	border-radius: .6em;
+	color: #fff;
+	background-color: #343a40;
+	box-shadow: rgba(0, 0, 0, 0.4) 0 1px 2px;
+}
+
+.cardLy {
+	width: 100%;
+	height: inherit;
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+}
+
+.cardLy > div {
+	padding: 0 1.6em;	
+}
+
+.rone {
+	padding: 1em 0;
+}
+
+.rtwo {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	justify-self: center;
+	place-items: center;
+	text-align: center;
+}
+
+.rtwo {
+	width: 100%;
+}
+
+.rthree {
+	padding: 1em 0;
+}
