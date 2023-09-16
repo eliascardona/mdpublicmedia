@@ -1,3 +1,5 @@
+import { createContext, useEffect, useState } from "react"
+import { firestore } from "../firebase/base"
 import {
 		collection,
 		limit,
@@ -5,11 +7,10 @@ import {
 		onSnapshot,
 		where
 } from "firebase/firestore"
-import { createContext, useEffect, useState } from "react"
 export const TrialsContext = createContext([])
 
-export default function TProvider() {
-	const [array, setArray] = useState(TrialsContext)
+export default function TProvider({ children }) {
+	const [array, setArray] = useState([])
 
 	useEffect(()=> {
 		const q = query(
@@ -20,23 +21,24 @@ export default function TProvider() {
 		const unsub = onSnapshot(q,
 			(snapshot) => {
 				const A = []
-				snapshot.forEach(info => A.push(info.data()))
+				snapshot.forEach(info => {
+					A.push(info.data())
+				})
 				setArray(A)
 			},
 			(error) => {
+				console.log("The following error have its origin on DB")
 				console.log(error, error.code)
 			}
 		)
 		return unsub
-	},[])
-
-	useEffect(()=>{
-		array.map((el, i, arr) => console.log(arr))
-	},[array])
+	}, [])
 
 	return (
 		<TrialsContext.Provider value={[array, setArray]}>
-			<div></div>
+			<div>
+				{children}
+			</div>
 		</TrialsContext.Provider>
 	)
 }
